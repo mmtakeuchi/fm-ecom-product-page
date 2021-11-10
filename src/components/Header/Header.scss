@@ -1,0 +1,44 @@
+@import "../../styles/variables";
+
+.headerContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5em 0;
+  color: $dark-grayish-blue;
+  font-weight: $weight400;
+  border-bottom: 1px solid $grayish-blue;
+
+  .headerLinks {
+    display: flex;
+    flex: 2;
+    list-style: none;
+    justify-content: flex-start;
+    text-align: left;
+
+    li {
+      margin: 0 0.5em;
+    }
+  }
+
+  .cartAvatar {
+    display: flex;
+    align-items: center;
+
+    .cartBtn {
+      cursor: pointer;
+      border: none;
+      background: none;
+    }
+
+    .cartImg:active {
+      color: $very-vark-blue;
+    }
+  }
+  .cartAvatar > img {
+    margin-left: 2em;
+  }
+  .avatar {
+    width: 2.7em;
+  }
+}
