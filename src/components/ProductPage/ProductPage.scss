@@ -38,16 +38,11 @@
       .imageThumbnail {
         cursor: pointer;
         border: 3px solid $white;
-      }
 
-      .imageThumbnail:hover {
-        border: 3px solid $orange;
-        opacity: 0.5;
-      }
-
-      .imageThumbnail:active {
-        border: 3px solid $orange;
-        opacity: 0.5;
+        &-active {
+          border: 3px solid $orange;
+          opacity: 0.5;
+        }
       }
     }
   }

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import "./ProductPage.scss";
 import productImg from "../../assets/images/image-product-1.jpg";
 import cart from "../../assets/images/icon-cart.svg";
@@ -17,14 +17,16 @@ const images = importAll(
 const ProductPage = ({ product, addToCart }) => {
   const [quantity, setQuantity] = useState(0);
   const [activeImg, setActiveImg] = useState(productImg);
-  console.log(activeImg);
-  //   console.log(quantity);
+  const [active, setActive] = useState(1);
+  const imageRef = useRef(null);
 
   const handleClick = (e) => {
     if (e.target.textContent === "+") {
       setQuantity(quantity + 1);
     } else {
-      setQuantity(quantity - 1);
+      if (quantity > 0) {
+        setQuantity(quantity - 1);
+      }
     }
   };
 
@@ -39,6 +41,7 @@ const ProductPage = ({ product, addToCart }) => {
       (image) => image.includes(prodId) && !image.includes("thumbnail")
     );
 
+    setActive(e.target.dataset.id);
     setActiveImg(images[prodImg].default);
   };
 
@@ -49,8 +52,11 @@ const ProductPage = ({ product, addToCart }) => {
         <img
           src={images[image].default}
           alt={images[image]}
-          className="imageThumbnail"
+          className={`imageThumbnail${
+            parseInt(active) === i + 1 ? "-active" : ""
+          }`}
           data-id={i + 1}
+          ref={imageRef}
         />
       </li>
     ));
