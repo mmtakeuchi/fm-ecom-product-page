@@ -3,17 +3,52 @@
 .productContainer {
   height: 100%;
   max-width: 100%;
+  margin-top: 2em;
   padding: 2em 0.5em;
   color: $very-vark-blue;
   display: flex;
+  justify-content: center;
+  align-items: center;
 
   .productImgContainer {
     flex: 55%;
-    padding: 1em 1.5em;
+    padding: 1.5em 1em;
+    text-align: center;
 
     .productImg {
       max-width: 100%;
+      height: 28em;
       border-radius: 15px;
+    }
+
+    .thumbnails {
+      display: flex;
+      justify-content: center;
+      max-width: 100%;
+      margin-top: 1.5em;
+      list-style: none;
+      padding: 0;
+
+      li > img {
+        width: 6.5em;
+        margin: 0.5em;
+        border-radius: 10px;
+      }
+
+      .imageThumbnail {
+        cursor: pointer;
+        border: 3px solid $white;
+      }
+
+      .imageThumbnail:hover {
+        border: 3px solid $orange;
+        opacity: 0.5;
+      }
+
+      .imageThumbnail:active {
+        border: 3px solid $orange;
+        opacity: 0.5;
+      }
     }
   }
 
@@ -74,7 +109,6 @@
       display: flex;
       margin-top: 1em;
       text-align: center;
-      vertical-align: text-top;
 
       .productQtyBtns {
         background: $light-grayish-blue;

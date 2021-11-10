@@ -1,11 +1,24 @@
 import React, { useState } from "react";
 import "./ProductPage.scss";
-import product from "../../assets/images/image-product-1.jpg";
+import productImg from "../../assets/images/image-product-1.jpg";
 import cart from "../../assets/images/icon-cart.svg";
 
-const ProductPage = () => {
+function importAll(r) {
+  let images = {};
+  r.keys().forEach((item, index) => {
+    images[item.replace("./", "")] = r(item);
+  });
+  return images;
+}
+const images = importAll(
+  require.context("../../assets/images", false, /\.(jpe?g)$/)
+);
+
+const ProductPage = ({ product, addToCart }) => {
   const [quantity, setQuantity] = useState(0);
-  console.log(quantity);
+  const [activeImg, setActiveImg] = useState(productImg);
+  console.log(activeImg);
+  //   console.log(quantity);
 
   const handleClick = (e) => {
     if (e.target.textContent === "+") {
@@ -15,22 +28,47 @@ const ProductPage = () => {
     }
   };
 
+  const handleAddToCart = () => {
+    addToCart(product, quantity);
+  };
+
+  const setImage = (e) => {
+    const prodId = e.target.dataset.id;
+
+    const prodImg = Object.keys(images).find(
+      (image) => image.includes(prodId) && !image.includes("thumbnail")
+    );
+
+    setActiveImg(images[prodImg].default);
+  };
+
+  const renderThumbnails = Object.keys(images)
+    .filter((key) => key.includes("thumbnail"))
+    .map((image, i) => (
+      <li key={i} onClick={setImage}>
+        <img
+          src={images[image].default}
+          alt={images[image]}
+          className="imageThumbnail"
+          data-id={i + 1}
+        />
+      </li>
+    ));
+
   return (
     <div className="productContainer">
       <div className="productImgContainer">
-        <img src={product} alt="product" className="productImg" />
+        <img src={activeImg} alt="product" className="productImg" />
+        <ul className="thumbnails">{renderThumbnails}</ul>
       </div>
       <div className="productDetails">
         <p className="productTitle">{"Sneaker Company".toUpperCase()}</p>
-        <h1 className="productName">Fall Limited Edition Sneakers</h1>
-        <p className="productDescription">
-          These low-profile sneakers are your perfect casual wear companion.
-          Featuring a durable rubber outer sole, they’ll withstand everything
-          the weather can offer.
-        </p>
+        <h1 className="productName">{product.name}</h1>
+        <p className="productDescription">{product.description}</p>
         <div className="productPrice">
           <p className="finalPrice">
-            $125.00 <span className="discountPercent">50%</span>
+            {`$${parseFloat(product.price).toFixed(2)}`}
+            <span className="discountPercent">50%</span>
           </p>
           <p className="originalPrice">$250.00</p>
         </div>
@@ -40,7 +78,7 @@ const ProductPage = () => {
             <span className="quantity">{quantity}</span>
             <button onClick={handleClick}>+</button>
           </div>
-          <button className="addProductBtn">
+          <button className="addProductBtn" onClick={handleAddToCart}>
             <img src={cart} alt="shopping cart" />
             Add to cart
           </button>
