@@ -10,6 +10,7 @@
   border-bottom: 1px solid $grayish-blue;
 
   .headerLinks {
+    cursor: pointer;
     display: flex;
     flex: 2;
     list-style: none;
@@ -17,7 +18,33 @@
     text-align: left;
 
     li {
-      margin: 0 0.5em;
+      cursor: pointer;
+      margin: 0 0.75em;
+      display: inline-block;
+      position: relative;
+    }
+
+    li:hover {
+      color: $very-vark-blue;
+    }
+
+    li:after {
+      content: "";
+      position: absolute;
+      width: 100%;
+      transform: scaleX(0);
+      height: 4px;
+      top: 3.35em;
+      left: 0;
+      color: $very-vark-blue;
+      background: $orange;
+      transform-origin: bottom right;
+      transition: transform 0.25s ease-out;
+    }
+
+    li:hover:after {
+      transform: scaleX(1);
+      transform-origin: bottom left;
     }
   }
 
@@ -31,14 +58,104 @@
       background: none;
     }
 
-    .cartImg:active {
-      color: $very-vark-blue;
+    .cartImg-active {
+      filter: brightness(0);
+    }
+
+    .cartImg:hover {
+      filter: brightness(0);
     }
   }
+
   .cartAvatar > img {
     margin-left: 2em;
   }
+
   .avatar {
+    cursor: pointer;
     width: 2.7em;
+
+    &-active {
+      width: 2.7em;
+      border: 2px solid $orange;
+      border-radius: 50%;
+    }
+  }
+
+  .cart {
+    display: none;
+
+    &-open {
+      position: absolute;
+      background: $white;
+      border-radius: 7px;
+      z-index: 1;
+      top: 90px;
+      right: 130px;
+      box-shadow: 0px 8px 12px 2px $grayish-blue;
+      color: $dark-grayish-blue;
+    }
+
+    &-title {
+      color: $very-vark-blue;
+      margin: 0;
+      padding: 0.75em 0.75em 0.25em 0.75em;
+    }
+
+    .line {
+      color: $very-vark-blue;
+      background: $very-vark-blue;
+      height: 0.5;
+    }
+
+    &-container {
+      display: flex;
+      align-items: center;
+      padding: 0.75em 0.75em 0.25em 0.75em;
+
+      .cart-image {
+        width: 5em;
+        margin-right: 1em;
+      }
+
+      .cart-details {
+        .product-name {
+          font-weight: $weight700;
+          margin: 0.25em;
+          font-size: 1.3rem;
+        }
+
+        .product-price {
+          margin: 0.15em 0.25em;
+          font-size: 1.15rem;
+        }
+
+        .cart-total {
+          margin-left: 1em;
+          font-size: 1.2rem;
+          font-weight: $weight700;
+          color: $very-vark-blue;
+        }
+      }
+
+      .trashcan {
+        cursor: pointer;
+        width: 1em;
+        margin-left: 1em;
+      }
+    }
+
+    &-checkoutBtn {
+      cursor: pointer;
+      display: block;
+      padding: 0.5em 3em;
+      border: 0;
+      border-radius: 5px;
+      color: $white;
+      font-size: 1rem;
+      font-weight: $weight700;
+      background: $orange;
+      margin: 0.5em auto;
+    }
   }
 }
