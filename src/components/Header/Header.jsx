@@ -9,7 +9,7 @@ import trashcan from "../../assets/images/icon-delete.svg";
 const Header = ({ cart, emptyCart }) => {
   const [activeAvi, setActiveAvi] = useState(false);
   const [activeCart, setActiveCart] = useState(false);
-  console.log(cart);
+  console.log(Object.keys(cart).length);
 
   const activateAvi = () => {
     setActiveAvi(!activeAvi);
@@ -24,27 +24,34 @@ const Header = ({ cart, emptyCart }) => {
       <div className={`cart${activeCart ? "-open" : ""}`}>
         <h2 className="cart-title">Cart</h2>
         <hr className="line" />
-        <div className="cart-container">
-          <div>
-            <img src={prodThumb} alt={cart.name} className="cart-image" />
-          </div>
-          <div className="cart-details">
-            <p className="product-name">{cart.name}</p>
-            <p className="product-price">
-              {`$${cart.price.toFixed(2)}`} x {cart.quantity}
-              <span className="cart-total">{`$${(
-                cart.price * cart.quantity
-              ).toFixed(2)}`}</span>
-            </p>
-          </div>
-          <img
-            src={trashcan}
-            alt="trash can"
-            className="trashcan"
-            onClick={emptyCart}
-          />
-        </div>
-        <button className="cart-checkoutBtn">Add to cart</button>
+
+        {Object.keys(cart).length ? (
+          <>
+            <div className="cart-container">
+              <div>
+                <img src={prodThumb} alt={cart.name} className="cart-image" />
+              </div>
+              <div className="cart-details">
+                <p className="product-name">{cart.name}</p>
+                <p className="product-price">
+                  {`$${cart.price.toFixed(2)}`} x {cart.quantity}
+                  <span className="cart-total">{`$${(
+                    cart.price * cart.quantity
+                  ).toFixed(2)}`}</span>
+                </p>
+              </div>
+              <img
+                src={trashcan}
+                alt="trash can"
+                className="trashcan"
+                onClick={emptyCart}
+              />
+            </div>
+            <button className="cart-checkoutBtn">Add to cart</button>
+          </>
+        ) : (
+          <div className="cart-empty">Your cart is empty</div>
+        )}
       </div>
     );
   };
@@ -60,13 +67,16 @@ const Header = ({ cart, emptyCart }) => {
         <li>Contact</li>
       </ul>
       <div className="cartAvatar">
-        <button className="cartBtn" onClick={activateCart}>
+        <div className="cart-container" onClick={activateCart}>
           <img
             src={cartImg}
             alt="shopping cart"
             className={`cartImg${activeCart ? "-active" : ""}`}
           />
-        </button>
+          {Object.keys(cart).length > 0 && (
+            <div className="cart-noti">{cart.quantity}</div>
+          )}
+        </div>
         <img
           src={avatar}
           alt="avatar"
@@ -74,7 +84,7 @@ const Header = ({ cart, emptyCart }) => {
           onClick={activateAvi}
         />
       </div>
-      {Object.keys(cart).length > 0 && renderMiniCart()}
+      {renderMiniCart()}
     </div>
   );
 };
