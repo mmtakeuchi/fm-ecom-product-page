@@ -5,11 +5,11 @@ import cartImg from "../../assets/images/icon-cart.svg";
 import avatar from "../../assets/images/image-avatar.png";
 import prodThumb from "../../assets/images/image-product-1-thumbnail.jpg";
 import trashcan from "../../assets/images/icon-delete.svg";
+import menu from "../../assets/images/icon-menu.svg";
 
 const Header = ({ cart, emptyCart }) => {
   const [activeAvi, setActiveAvi] = useState(false);
   const [activeCart, setActiveCart] = useState(false);
-  console.log(Object.keys(cart).length);
 
   const activateAvi = () => {
     setActiveAvi(!activeAvi);
@@ -47,7 +47,7 @@ const Header = ({ cart, emptyCart }) => {
                 onClick={emptyCart}
               />
             </div>
-            <button className="cart-checkoutBtn">Add to cart</button>
+            <button className="cart-checkoutBtn">Checkout</button>
           </>
         ) : (
           <div className="cart-empty">Your cart is empty</div>
@@ -58,6 +58,7 @@ const Header = ({ cart, emptyCart }) => {
 
   return (
     <div className="headerContainer">
+      <img src={menu} alt="menu icon" className="mobile-menu" />
       <img src={logo} alt="company logo" />
       <ul className="headerLinks">
         <li>Collections</li>

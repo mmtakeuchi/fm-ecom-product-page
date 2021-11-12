@@ -1,14 +1,15 @@
 @import "../../styles/variables";
 
 .productContainer {
-  height: 100%;
-  max-width: 100%;
+  height: auto;
+  min-height: 100%;
   margin-top: 2em;
-  padding: 2em 0.5em;
+  padding: 1em 0.25em;
   color: $very-vark-blue;
   display: flex;
   justify-content: center;
   align-items: center;
+  overflow: hidden;
 
   .productImgContainer {
     flex: 55%;
@@ -19,6 +20,10 @@
       max-width: 100%;
       height: 28em;
       border-radius: 15px;
+    }
+
+    .photo-change-btn {
+      display: none;
     }
 
     .thumbnails {
@@ -152,4 +157,290 @@
 
 .productContainer > div {
   margin: 0.5em;
+}
+
+@media screen and (max-width: 800px) {
+  .productContainer {
+    .productImgContainer {
+      flex: 50%;
+      padding: 1em 0.5em;
+
+      .productImg {
+        width: 20em;
+        height: 20em;
+      }
+
+      .thumbnails {
+        li > img {
+          width: 4em;
+          margin: 0.25em;
+          border-radius: 10px;
+        }
+      }
+    }
+
+    .productDetails {
+      flex: 50%;
+      padding: 1em 0.5em;
+
+      .productTitle {
+        margin: 0;
+        color: $orange;
+        font-size: 1rem;
+        font-weight: $weight700;
+      }
+
+      .productName {
+        font-weight: $weight700;
+        font-size: 1.5rem;
+        margin: 0.25em 0;
+      }
+
+      .productDescription {
+        color: $dark-grayish-blue;
+        font-weight: $weight400;
+        font-size: 1rem;
+      }
+
+      .productPrice {
+        color: $very-vark-blue;
+        font-weight: $weight700;
+        margin: 0.25em 0 1em;
+
+        .finalPrice {
+          margin: 0.1em 0;
+          font-size: 1rem;
+
+          .discountPercent {
+            margin-left: 1em;
+            padding: 0.15em 0.3em;
+            border-radius: 5px;
+            font-size: 1rem;
+            color: $orange;
+            background: $pale-orange;
+          }
+        }
+
+        .originalPrice {
+          margin: 0.1em 0;
+          font-size: 1rem;
+          color: $grayish-blue;
+          text-decoration: line-through;
+        }
+      }
+
+      .productBtns {
+        display: flex;
+        margin-top: 0.4em;
+        text-align: center;
+
+        .productQtyBtns {
+          background: $light-grayish-blue;
+          margin-right: 1.2em;
+          border-radius: 7px;
+
+          .quantity {
+            font-size: 1rem;
+            font-weight: $weight700;
+            margin: 0 0.25em;
+          }
+
+          button {
+            cursor: pointer;
+            height: 1.5em;
+            padding: 0.5em 0.75em;
+            font-size: 1rem;
+            border: none;
+            background: none;
+            color: $orange;
+          }
+        }
+
+        .addProductBtn {
+          cursor: pointer;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          padding: 0.5em 1.5em;
+          border: 0;
+          border-radius: 5px;
+          color: $white;
+          font-size: 0.9rem;
+          font-weight: $weight700;
+          background: $orange;
+          box-shadow: 0 15px 10px $pale-orange;
+
+          img {
+            color: $white;
+            filter: brightness(0) invert(1);
+            margin-right: 1em;
+            width: 1.5em;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .productContainer {
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
+
+    .productImgContainer {
+      width: 100%;
+      padding: 0;
+      margin: 0;
+
+      .productImg {
+        border-radius: 0;
+        width: 100%;
+      }
+
+      .photo-change-btn {
+        width: 25px;
+        height: 25px;
+        border-radius: 50%;
+        background: #f1f1f1;
+        border: 1px solid rgba(34, 34, 34, 0.287);
+        position: absolute;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+
+        img {
+          width: 13px;
+          height: 13px;
+          pointer-events: none;
+        }
+
+        &.prev {
+          top: 23%;
+          left: 20px;
+          transform: translateY(-60%);
+        }
+
+        &.next {
+          top: 23%;
+          right: 20px;
+          transform: translateY(-60%);
+        }
+      }
+
+      .thumbnails {
+        display: none;
+      }
+    }
+
+    .productDetails {
+      padding: 1.5em 1.6em;
+      margin: 0;
+
+      .productTitle {
+        margin: 0;
+        color: $orange;
+        font-size: 1rem;
+        font-weight: $weight700;
+      }
+
+      .productName {
+        font-weight: $weight700;
+        font-size: 1.85rem;
+        margin: 0.4em 0 0;
+      }
+
+      .productDescription {
+        color: $dark-grayish-blue;
+        font-weight: $weight400;
+        font-size: 1.15rem;
+      }
+
+      .productPrice {
+        color: $very-vark-blue;
+        font-weight: $weight700;
+        margin: 0.1em 0;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+
+        .finalPrice {
+          margin: 0.1em 0;
+          font-size: 1.4rem;
+
+          .discountPercent {
+            margin-left: 1em;
+            padding: 0.15em 0.3em;
+            border-radius: 5px;
+            font-size: 1.1rem;
+            color: $orange;
+            background: $pale-orange;
+          }
+        }
+
+        .originalPrice {
+          margin: 0.1em 0;
+          font-size: 1.4rem;
+          color: $grayish-blue;
+          text-decoration: line-through;
+        }
+      }
+
+      .productBtns {
+        flex-direction: column;
+        margin-top: 0.4em;
+        text-align: center;
+
+        .productQtyBtns {
+          background: $light-grayish-blue;
+          margin: 0.5em 0;
+          border-radius: 7px;
+          width: 100%;
+          height: 2em;
+          display: flex;
+          justify-content: space-around;
+          align-items: center;
+
+          .quantity {
+            font-size: 1.15rem;
+            font-weight: $weight700;
+            margin: 0 0.25em;
+          }
+
+          button {
+            cursor: pointer;
+            height: 2em;
+            padding: 0.5em 0 1.6em;
+            font-size: 1.5rem;
+            border: none;
+            background: none;
+            color: $orange;
+          }
+        }
+
+        .addProductBtn {
+          cursor: pointer;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          padding: 0.5em 1.5em;
+          border: 0;
+          border-radius: 5px;
+          color: $white;
+          font-size: 1.1rem;
+          font-weight: $weight700;
+          background: $orange;
+          box-shadow: 0 15px 10px $pale-orange;
+
+          img {
+            color: $white;
+            filter: brightness(0) invert(1);
+            margin-right: 1em;
+            width: 1.5em;
+          }
+        }
+      }
+    }
+  }
 }
