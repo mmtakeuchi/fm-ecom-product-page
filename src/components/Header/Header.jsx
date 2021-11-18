@@ -6,10 +6,12 @@ import avatar from "../../assets/images/image-avatar.png";
 import prodThumb from "../../assets/images/image-product-1-thumbnail.jpg";
 import trashcan from "../../assets/images/icon-delete.svg";
 import menu from "../../assets/images/icon-menu.svg";
+import close from "../../assets/images/icon-close.svg";
 
 const Header = ({ cart, emptyCart }) => {
   const [activeAvi, setActiveAvi] = useState(false);
   const [activeCart, setActiveCart] = useState(false);
+  const [toggleMenu, setToggleMenu] = useState(false);
 
   const activateAvi = () => {
     setActiveAvi(!activeAvi);
@@ -56,17 +58,52 @@ const Header = ({ cart, emptyCart }) => {
     );
   };
 
+  const links = (
+    <>
+      <li>Collections</li>
+      <li>Men</li>
+      <li>Women</li>
+      <li>About</li>
+      <li>Contact</li>
+    </>
+  );
+
   return (
     <div className="headerContainer">
-      <img src={menu} alt="menu icon" className="mobile-menu" />
-      <img src={logo} alt="company logo" />
-      <ul className="headerLinks">
-        <li>Collections</li>
-        <li>Men</li>
-        <li>Women</li>
-        <li>About</li>
-        <li>Contact</li>
-      </ul>
+      <div className="mobile_menu">
+        {toggleMenu ? (
+          <>
+            <img
+              src={close}
+              alt="close icon"
+              className="mobile_menu-icon"
+              onClick={() => setToggleMenu(false)}
+            />
+          </>
+        ) : (
+          <>
+            <img
+              src={menu}
+              alt="menu icon"
+              className="mobile_menu-icon"
+              onClick={() => setToggleMenu(true)}
+            />
+          </>
+        )}
+        {toggleMenu && (
+          <div className="mobile_menu_container">
+            <img
+              src={close}
+              alt="close icon"
+              className="mobile_menu-icon"
+              onClick={() => setToggleMenu(false)}
+            />
+            <div className="mobile_menu_container-links">{links}</div>
+          </div>
+        )}
+      </div>
+      <img src={logo} alt="company logo" className="logo" />
+      <ul className="headerLinks">{links}</ul>
       <div className="cartAvatar">
         <div className="cart-container" onClick={activateCart}>
           <img
